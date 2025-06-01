@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Линейная регрессия + R² + Экспорт</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>АНАЛИЗ ЛИНЕЙНОЙ РЕГРЕССИИ</h1>
+
+      <!-- Форма ввода -->
+      <form id="manualForm">
+        <h3>Введите данные</h3>
+        <div class="input-group">
+          <label>X (через запятую/пробел, дробная часть - точка):</label>
+          <input type="text" name="x" value="1.5 2.3 3.7" required />
+        </div>
+        <div class="input-group">
+          <label>Y (через запятую/пробел, дробная часть - точка):</label>
+          <input type="text" name="y" value="2.3 4.1 6.2" required />
+        </div>
+        <button type="submit">Рассчитать</button>
+      </form>
+
+      <!-- Загрузка файла -->
+      <div class="file-upload">
+        <h3>Или загрузите файл</h3>
+        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.txt" />
+        <small>Формат: .csv,.xlsx,.xls,.txt </small>
+      </div>
+
+      <div class="info-section">
+        <button id="showHelp">Показать требования к данным</button>
+        <div id="dataFormatHelp" class="hidden">
+          <h3>Формат данных для загрузки:</h3>
+          <div class="format-example">
+            <p>
+              Данные в столбцах могут располагаться с заголовком (необязательное
+              условие)
+            </p>
+            <h4>CSV файл:</h4>
+            <pre>
+X;Y
+1,5;2,3
+3,7;4,1
+5,2;6,8</pre
+            >
+            <p>
+              Разделитель столбцов - точка с запятой (;), дробная часть -
+              запятая (,)
+            </p>
+          </div>
+          <div class="format-example">
+            <h4>Excel файл:</h4>
+            <pre>
+|   A   |   B   |
+|-------|-------|
+| 1,5   | 2,3   |
+| 3,7   | 4,1   |
+| 5,2   | 6,8   |</pre
+            >
+            <p>Два столбца (X и Y), дробная часть - запятая (,)</p>
+          </div>
+          <div class="format-example">
+            <h4>Текстовый файл:</h4>
+            <pre>
+1.5 2.3     
+3.7 4.1
+5.2 6.8</pre
+            >
+            <pre> 1 2.1 2 3.9 3 6.2 4 7.8</pre>
+            <p>
+              Разделитель - пробел/табуляция/точка с запятой, дробная часть -
+              точка (.)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Результаты  -->
+      <div class="result">
+        <div class="chart-container">
+          <canvas id="regressionChart"></canvas>
+        </div>
+        <div class="stats">
+          <div id="equation">
+            Уравнение: <span class="formula">y = ax + b</span>
+          </div>
+          <div id="r2">R² (точность): <span class="value">0</span></div>
+
+          <small
+            >Визуализация на графике автоматически округляет дроби до 2 знаков
+            после запятой в подписях (полная точность сохраняется в
+            расчетах)</small
+          >
+
+          <div class="export-buttons">
+            <button id="exportPNG">Сохранить PNG</button>
+            <button id="exportPDF">Сохранить PDF</button>
+            <button id="resetData">Сбросить данные</button>
+            <button id="resetZoom">Сбросить масштаб</button>
+          </div>
+        </div>
+        <div id="error"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
