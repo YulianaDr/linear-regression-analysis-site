@@ -1,6 +1,8 @@
 # linear-regression-analysis-site
 # Анализатор линейной регрессии
 ![image](https://github.com/user-attachments/assets/0b7c5618-ecc4-482c-80ec-5caa582e1d9e)
+![image](https://github.com/user-attachments/assets/97590835-7c16-4317-a1fd-65d3a53e6f77)
+![image](https://github.com/user-attachments/assets/79fda406-c1ce-4534-ac3b-9bf47498dc47)
 ![image](https://github.com/user-attachments/assets/e923eae7-d9fa-432e-a5de-d560d205cc95)
 
 
